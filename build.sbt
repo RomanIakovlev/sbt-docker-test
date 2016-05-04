@@ -6,9 +6,12 @@ name := "sbt-docker-test"
 
 enablePlugins(DockerPlugin)
 
-inTask(dockerTask)(sbtdocker.DockerSettings.baseDockerSettings)
+inConfig(dockerConfig)(sbtdocker.DockerSettings.baseDockerSettings)
 
-dockerfile in docker in dockerTask := new Dockerfile {
+imageName in docker in dockerConfig := ImageName("sbt-docker-test-scoped")
+imageName in docker := ImageName("sbt-docker-test-unscoped")
+
+dockerfile in docker in dockerConfig := new Dockerfile {
 	from("busybox")
 	entryPoint("echo", "scoped")
 }

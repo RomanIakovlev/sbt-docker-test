@@ -5,5 +5,5 @@ import sbt.Keys._
 import sbtdocker._
 
 object DockerScope {
-  val dockerTask = taskKey[Unit]("")
+  lazy val dockerConfig = config("dockerConfig")
 }
